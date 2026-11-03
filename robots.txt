@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vas-domen.ba/sitemap.xml
+Sitemap: https://vilceknenad1.github.io/logopedski-centar-Logoprax/sitemap.xml

@@ -1,4 +1,4 @@
-# LOGOPRAX — web sajt
+# LOGOPRAX web sajt
 
 Statički sajt (HTML + CSS + JS). **Nema build koraka, nema `npm install`, nema Next.js-a**, pa nema ni grešaka pri buildu. Šta je u folderu, to se objavljuje.
 
@@ -42,18 +42,20 @@ Sve putanje su **relativne** (`assets/...`, ne `/assets/...`), pa sajt radi i na
 | Ništa se ne mijenja | keš | Ctrl+F5, ili sačekaj 1–2 min nakon commita |
 | Pages traži „workflow" | izabran *GitHub Actions* | izaberi *Deploy from a branch* |
 
-> Alternativa bez Git-a: **Netlify Drop** (app.netlify.com/drop) — samo prevuci
+> Alternativa bez Git-a: **Netlify Drop** (app.netlify.com/drop): samo prevuci
 > folder `logoprax-site` u prozor i sajt je online za par sekundi.
 
 ---
 
-## Prije objave — 3 stvari
+## Prije objave: 3 stvari
 
-### 1) Domen
-U fajlovima `index.html`, `tomatis.html`, `politika-privatnosti.html`, `robots.txt`
-i `sitemap.xml` zamijeni **`https://www.vas-domen.ba`** pravim domenom
-(Find & Replace u cijelom folderu). Ako koristite vlastiti domen na GitHub Pages:
-Settings → Pages → Custom domain.
+### 1) Adresa sajta
+Sajt je podešen za adresu **https://vilceknenad1.github.io/logopedski-centar-Logoprax/**
+(canonical linkovi, sitemap i podaci za Google). Kad centar dobije svoj domen
+(npr. logoprax.ba), u fajlovima `index.html`, `tomatis.html`,
+`politika-privatnosti.html`, `robots.txt` i `sitemap.xml` zamijeni
+`https://vilceknenad1.github.io/logopedski-centar-Logoprax` novim domenom
+(Find & Replace) i u GitHub-u: Settings → Pages → Custom domain.
 
 ### 2) Forma za zakazivanje (da upiti stižu na email)
 Statički hosting ne može sam slati email, pa se koristi besplatni servis **Formspree**:
@@ -65,7 +67,7 @@ Statički hosting ne može sam slati email, pa se koristi besplatni servis **For
 Dok `formEndpoint` nije podešen, forma provjerava polja, ali umjesto slanja
 prikazuje poruku da nas posjetilac pozove telefonom. Ništa se ne gubi tiho.
 
-### 3) Sadržaj za dopuniti (označen sa `[ … — dopuniti]`)
+### 3) Sadržaj za dopuniti (označen sa `[ … : dopuniti]`)
 - biografije: Dajana Andrić, Sara Trišić, Đorđe Gospavić
 - raspored Tomatis ciklusa (tomatis.html)
 - email centra i rok čuvanja podataka (politika-privatnosti.html, preporuka: da pregleda pravnik)

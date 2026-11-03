@@ -1,4 +1,4 @@
-/* LOGOPRAX — glavni stil */
+/* LOGOPRAX: glavni stil */
 body{margin:0;background:#F5FAF8}
 html{scroll-behavior:smooth}
 a{color:#367A65}a:hover{color:#285C4C}
@@ -56,7 +56,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #32B69A;outline-offset:3p
 .founder-img{min-height:340px !important}
 section[style*="clamp(72px"]{padding-top:56px !important;padding-bottom:60px !important}
 #pocetna{padding-top:28px !important;padding-bottom:44px !important}
-.about-img img{height:280px !important;object-fit:cover;object-position:center 18%}
+.about-img{border-radius:12px !important}
+.about-deco{display:none !important}
+#o-nama > div{gap:28px !important}
+.about-img img{height:auto !important;aspect-ratio:1179 / 1340;object-fit:cover;object-position:center top}
 .founder-bio:not(.open){display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 .bio-toggle{display:inline-flex}
 .banner-img{aspect-ratio:1 / 1 !important}
@@ -65,7 +68,9 @@ section[aria-labelledby="iskustva"] figure{min-height:0 !important;gap:18px !imp
 section[aria-labelledby="iskustva"] blockquote{font-size:17px !important;line-height:1.55 !important}
 .map-card{min-height:220px !important}
 .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:28px 20px !important;padding-bottom:32px !important}
-.foot-grid > :first-child,.foot-grid > :last-child{grid-column:span 2}
+.foot-grid > :first-child,.foot-grid > :last-child{grid-column:1 / -1 !important}
+.foot-grid a{word-break:normal}
+.foot-grid > :first-child p{max-width:340px}
 footer{font-size:14px}
 section[aria-labelledby="zasto"] .g12 > div{min-height:0 !important}
 section[aria-labelledby="zasto"] .g12 > div.tm{flex-wrap:nowrap !important;align-items:stretch}

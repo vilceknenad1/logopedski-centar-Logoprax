@@ -1,4 +1,4 @@
-/* LOGOPRAX — interakcije sajta (bez biblioteka, bez build koraka) */
+/* LOGOPRAX: interakcije sajta (bez biblioteka, bez build koraka) */
 (function () {
   'use strict';
 
@@ -161,7 +161,7 @@
       var data = {
         ime: fields.ime.value.trim(), telefon: fields.tel.value.trim(), email: fields.email.value.trim(),
         uzrast: age, usluga: fields.usluga.value, poruka: fields.poruka.value.trim(),
-        _subject: 'Novi upit za termin — LOGOPRAX sajt'
+        _subject: 'Novi upit za termin (LOGOPRAX sajt)'
       };
       fetch(CONFIG.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); })
