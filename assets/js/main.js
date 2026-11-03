@@ -55,7 +55,7 @@
       var run = function () {
         if (started) return; started = true;
         var t0 = performance.now(), D = 1800;
-        var step = function (t) { var k = Math.min(1, (t - t0) / D); render(1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); };
+        var step = function (t) { var k = Math.max(0, Math.min(1, (t - t0) / D)); render(1 - Math.pow(1 - k, 3)); if (k < 1) requestAnimationFrame(step); };
         requestAnimationFrame(step);
       };
       var io = new IntersectionObserver(function (en) { if (en.some(function (x) { return x.isIntersecting; })) { run(); io.disconnect(); } }, { threshold: 0.35 });
