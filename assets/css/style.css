@@ -131,6 +131,7 @@ section[aria-labelledby="zasto"] h2{margin-bottom:28px !important}
 @media (prefers-reduced-motion: no-preference){
 section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:lpRise linear both;animation-timeline:view();animation-range:entry 5% cover 28%}
 }
+@container lp (max-width:1080px){section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:none !important;opacity:1 !important;translate:none !important}}
 }
 
 /* Stranica usluge */
