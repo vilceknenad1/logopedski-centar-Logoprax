@@ -63,6 +63,37 @@
     }
   }
 
+  /* ---------- Usluge: lista + velika fotografija ---------- */
+  var svcBtns = $$('.svc-btn');
+  if (svcBtns.length) {
+    var svcImgs = $$('.svc-img');
+    var setSvc = function (k) {
+      svcBtns.forEach(function (b, i) {
+        var on = i === k, sp = b.children, ar = sp[2];
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.style.color = on ? '#367A65' : '#202725';
+        sp[0].style.color = on ? '#55B99D' : '#9AA6A2';
+        ar.style.background = on ? '#367A65' : 'transparent';
+        ar.style.color = on ? '#FFFFFF' : '#367A65';
+        ar.style.borderColor = on ? '#367A65' : '#C9DAD4';
+        ar.style.transform = 'rotate(' + (on ? '0deg' : '-45deg') + ')';
+        var body = b.parentNode.querySelector('.acc-body'); if (body) body.hidden = !on;
+      });
+      svcImgs.forEach(function (im, i) { im.style.opacity = i === k ? '1' : '0'; im.style.transform = 'scale(' + (i === k ? 1 : 1.06) + ')'; });
+      var row = svcBtns[k], body = row.parentNode.querySelector('.acc-body');
+      $('#cur-num').textContent = '0' + (k + 1);
+      $('#cur-tag').textContent = row.children[1].children[1].textContent;
+      $('#cur-title').textContent = row.querySelector('.svc-title').textContent;
+      $('#cur-desc').textContent = body.querySelector('p').textContent;
+      $('#cur-href').setAttribute('href', body.querySelector('a').getAttribute('href'));
+    };
+    var canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    svcBtns.forEach(function (b, i) {
+      b.addEventListener('click', function () { setSvc(i); });
+      if (canHover) b.addEventListener('mouseenter', function () { setSvc(i); });
+    });
+  }
+
   /* ---------- Utisci roditelja (vrteška) ---------- */
   var T = [
     { text: 'Javili smo se jer je naš sin kasnio s govorom i imao poteškoće s razumijevanjem jezika. Zahvaljujući stručnom, profesionalnom i toplom pristupu osoblja, napravio je ogroman napredak. Najviše nam znači što je na terapije odlazio s velikom radošću.', who: 'S.E., roditelj', src: 'Instagram · logoprax_brcko' },

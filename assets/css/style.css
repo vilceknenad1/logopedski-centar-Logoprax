@@ -36,6 +36,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #32B69A;outline-offset:3p
 .svc .more svg{width:14px;height:14px}
 }
 .swipe-hint{display:none}
+.acc-body{display:none}
+.svc-btn:hover .svc-title{text-decoration:none}
+@container lp (max-width:900px){.svc-panel{display:none !important}.acc-body{display:flex}.svc-list{flex-basis:100% !important}}
 .bio-toggle{display:none}
 .team-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:20px !important}
 .team-grid > article{display:grid !important;grid-template-columns:136px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:18px;row-gap:8px !important;background:#F5FAF8;border:1px solid #E3EEEA;border-radius:10px;padding:14px;align-items:start}
