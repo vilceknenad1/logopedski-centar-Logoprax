@@ -64,11 +64,12 @@ Statički hosting ne može sam slati email, pa se koristi besplatni servis **For
 2. U `assets/js/main.js`, na vrhu: `formEndpoint: 'https://formspree.io/f/abcdwxyz'`.
 3. Pošalji probni upit sa sajta i potvrdi email koji Formspree pošalje.
 
-Dok `formEndpoint` nije podešen, forma provjerava polja, ali umjesto slanja
-prikazuje poruku da nas posjetilac pozove telefonom. Ništa se ne gubi tiho.
+Dok `formEndpoint` nije podešen, forma provjerava polja i pripremi poruku sa
+svim podacima, koju posjetilac jednim dodirom šalje putem Vibera, WhatsAppa ili
+SMS-a na broj centra (ili poziva). Ništa se ne gubi tiho.
 
 ### 3) Sadržaj za dopuniti (označen sa `[ … : dopuniti]`)
-- biografije: Dajana Andrić, Sara Trišić, Đorđe Gospavić
+- biografije: Dajana Andrić, Sara Trišić, Đorđe Gospavić (dok ih nema, prikazani su samo ime i zvanje)
 - raspored Tomatis ciklusa (tomatis.html)
 - email centra i rok čuvanja podataka (politika-privatnosti.html, preporuka: da pregleda pravnik)
 - Google recenzije u `main.js` (niz `T`) zamijeniti originalnim tekstovima roditelja
