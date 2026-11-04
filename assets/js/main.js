@@ -26,16 +26,27 @@
   /* ---------- Mobilni meni ---------- */
   var menuBtn = $('#menu-btn'), mobileNav = $('#mobile-nav');
   if (menuBtn && mobileNav) {
+    var menuTimer;
     var setMenu = function (open) {
-      mobileNav.hidden = !open;
+      clearTimeout(menuTimer);
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
       menuBtn.setAttribute('aria-label', open ? 'Zatvori meni' : 'Otvori meni');
       $('.ic-open', menuBtn).hidden = open;
       $('.ic-close', menuBtn).hidden = !open;
+      document.documentElement.classList.toggle('menu-open', open);
+      if (open) {
+        mobileNav.hidden = false;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { mobileNav.classList.add('is-open'); }); });
+      } else {
+        mobileNav.classList.remove('is-open');
+        menuTimer = setTimeout(function () { mobileNav.hidden = true; }, reduceMotion ? 0 : 220);
+      }
     };
-    menuBtn.addEventListener('click', function () { setMenu(mobileNav.hidden); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1080 && !mobileNav.hidden) setMenu(false); });
+    menuBtn.addEventListener('click', function () { setMenu(mobileNav.hidden || !mobileNav.classList.contains('is-open')); });
     $$('a', mobileNav).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mobileNav.hidden) { setMenu(false); menuBtn.focus(); } });
+    document.addEventListener('click', function (e) { if (!mobileNav.hidden && header && !header.contains(e.target)) setMenu(false); });
   }
 
   /* ---------- Brojači u traci poverenja ---------- */
@@ -117,6 +128,15 @@
     $('#t-prev').addEventListener('click', function () { show(ti - 1); });
     $('#t-next').addEventListener('click', function () { show(ti + 1); });
     dots.forEach(function (d) { d.addEventListener('click', function () { show(parseInt(d.getAttribute('data-i'), 10)); }); });
+    var fig = tText.closest('figure'), sx = 0, sy = 0, tracking = false;
+    if (fig) {
+      fig.addEventListener('touchstart', function (e) { var t = e.touches[0]; sx = t.clientX; sy = t.clientY; tracking = true; }, { passive: true });
+      fig.addEventListener('touchend', function (e) {
+        if (!tracking) return; tracking = false;
+        var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) show(ti + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+    }
   }
 
   /* ---------- Biografija osnivača (telefon) ---------- */

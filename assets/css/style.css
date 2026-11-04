@@ -134,6 +134,48 @@ section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol
 @container lp (max-width:1080px){section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:none !important;opacity:1 !important;translate:none !important}}
 }
 
+/* ===== MOBILNA OPTIMIZACIJA (samo ≤1080px; desktop netaknut) ===== */
+@container lp (max-width:680px){
+header > div:first-of-type{padding-top:10px !important;padding-bottom:10px !important}
+header > div:first-of-type > a:first-child{gap:10px !important}
+header > div:first-of-type > a:first-child img{width:42px !important;height:42px !important}
+header > div:first-of-type > a:first-child > span > span:first-child{font-size:18px !important}
+header > div:first-of-type > a:first-child > span > span:last-child{font-size:10px !important;margin-top:4px !important}
+#pocetna > div:last-of-type{gap:28px !important}
+#pocetna > div:last-of-type > div:first-child{gap:18px !important}
+#pocetna > div:last-of-type > div:first-child > p:first-child{font-size:11px !important;letter-spacing:.13em !important;gap:10px !important;text-wrap:balance}
+#pocetna > div:last-of-type > div:first-child > p:first-child > span{width:18px !important;flex:none}
+#pocetna h1{font-size:clamp(36px,10.6vw,44px) !important;line-height:1.04 !important}
+#pocetna > div:last-of-type > div:first-child > p:nth-child(3){font-size:16.5px !important;line-height:1.55 !important}
+#pocetna > div:last-of-type > div:first-child > div:nth-child(4){flex-direction:column;align-items:stretch;gap:4px !important;margin-top:2px !important}
+#pocetna > div:last-of-type > div:first-child > div:nth-child(4) a{justify-content:center;text-align:center;min-height:52px;display:flex;align-items:center}
+#pocetna > div:last-of-type > div:first-child > div:nth-child(4) a:last-child{border-color:transparent !important;background:transparent !important;padding:12px 16px !important;font-size:15px !important}
+section h2{font-size:clamp(28px,8.2vw,32px) !important;line-height:1.1 !important}
+#zakazivanje h2{font-size:clamp(32px,9vw,36px) !important}
+.chip{min-height:44px}
+.svc > div:last-child > span:first-child{font-size:11px !important}
+.hero-quote > span:first-child > span{font-size:11px !important}
+.hero-quote figcaption a{display:inline-flex !important;align-items:center;min-height:44px}
+.foot-grid > *{gap:0 !important}
+.foot-grid > * > a{padding:11px 0;display:block}
+.foot-grid > * > span:first-child{margin-bottom:6px !important}
+#kontakt a.btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;flex:1 1 40%;padding-left:12px !important;padding-right:12px !important}
+#kontakt a.btn:first-child{flex-basis:100%}
+}
+@container lp (max-width:1080px){section[id],#zakazivanje{scroll-margin-top:72px}.chip{min-height:44px}section[aria-labelledby="iskustva"] button[aria-label^="Utisak"]{box-sizing:content-box;padding:17px 6px !important;background-clip:content-box !important}.hero-quote figcaption a{display:inline-flex !important;align-items:center;min-height:44px}}
+@container lp (min-width:681px) and (max-width:1080px){
+.hero-media{max-width:560px;width:100%;margin:0 auto}
+#pocetna > div:last-of-type{gap:48px !important}
+#usluge .s7,#usluge .s5,#usluge .s8{grid-column:span 6 !important}
+#usluge .svc > div:first-child{height:230px !important;min-height:0 !important;flex:none !important}
+#usluge .s8{flex-direction:column !important;flex-wrap:nowrap !important}
+#usluge .s8 > div:last-child{flex:1 1 auto !important}
+#usluge .g12 > a:last-child{grid-column:span 12 !important;flex-direction:row !important;align-items:stretch}
+#usluge .g12 > a:last-child > div:first-child{height:auto !important;flex:0 0 42% !important;padding:22px !important}
+#usluge .g12 > a:last-child > div:first-child > div{height:100% !important;min-height:200px}
+.about-img{max-width:520px !important}
+}
+
 /* Stranica usluge */
 .rel{transition:box-shadow .3s ease,transform .3s ease}.rel:hover{transform:translateY(-3px);box-shadow:0 20px 40px -26px rgba(54,122,101,.45)}
 
@@ -144,4 +186,9 @@ section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol
 .founder-bio.open{display:block !important;-webkit-line-clamp:unset !important;overflow:visible !important}
 .is-invalid{border:1.5px solid #B42318 !important}
 [hidden]{display:none !important}
+#mobile-nav{opacity:0;transform:translateY(-6px);transition:opacity .22s ease,transform .22s ease;max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain}
+#mobile-nav.is-open{opacity:1;transform:none;box-shadow:0 0 0 100vmax rgba(15,59,49,.38);clip-path:inset(0 -100vmax -100vmax -100vmax)}
+html.menu-open,html.menu-open body{overflow:hidden}
+@media (prefers-reduced-motion: reduce){#mobile-nav{transition:none}}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #32B69A;outline-offset:1px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
