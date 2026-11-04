@@ -203,11 +203,7 @@
         return;
       }
       errBox.hidden = true;
-      if (!CONFIG.formEndpoint) {
-        errBox.hidden = false;
-        $('div', errBox).textContent = 'Online forma trenutno nije aktivna. Molimo pozovite nas na ' + CONFIG.phone + '.';
-        return;
-      }
+      if (!CONFIG.formEndpoint) { showFallback(); return; }
       btn.disabled = true; btn.style.opacity = '0.7'; btn.textContent = 'Šaljem upit…';
       var data = {
         ime: fields.ime.value.trim(), telefon: fields.tel.value.trim(), email: fields.email.value.trim(),
@@ -228,6 +224,64 @@
           $('div', errBox).textContent = 'Slanje nije uspjelo. Provjerite internet vezu ili nas pozovite na ' + CONFIG.phone + '.';
         })
         .then(function () { btn.disabled = false; btn.style.opacity = '1'; btn.textContent = 'Pošaljite upit'; });
+    });
+
+    /* Dok forma nema servis za email: upit se priprema i šalje porukom (Viber, WhatsApp, SMS) ili poziv. */
+    function showFallback() {
+      var lines = ['Zdravo, želim zakazati termin u centru LOGOPRAX.',
+        'Ime i prezime: ' + fields.ime.value.trim(), 'Telefon: ' + fields.tel.value.trim()];
+      if (fields.email.value.trim()) lines.push('Email: ' + fields.email.value.trim());
+      lines.push('Uzrast djeteta: ' + age, 'Usluga: ' + fields.usluga.value);
+      if (fields.poruka.value.trim()) lines.push('Poruka: ' + fields.poruka.value.trim());
+      var msg = encodeURIComponent(lines.join('\n')), num = CONFIG.phone.replace(/[^0-9]/g, '');
+      var box = $('#form-fallback');
+      if (!box) {
+        box = document.createElement('div'); box.id = 'form-fallback'; box.setAttribute('role', 'status'); box.setAttribute('tabindex', '-1');
+        box.style.cssText = 'display:flex;flex-direction:column;gap:14px;padding:8px 0';
+        box.innerHTML =
+          '<span style="width:56px;height:56px;border-radius:50%;background:#DDF5EF;color:#367A65;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>' +
+          '<h3 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em">Upit je spreman. Još jedan dodir.</h3>' +
+          '<p style="margin:0;font-size:16px;line-height:1.6;color:#44504C">Izaberite kako želite da nam ga pošaljete. Poruka sa vašim podacima je već napisana.</p>' +
+          '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:4px">' +
+          '<a data-k="viber" class="btn btn-g" style="background:#367A65;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:14px 18px;border-radius:6px;min-height:50px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">Viber</a>' +
+          '<a data-k="wa" class="btn btn-g" style="background:#367A65;color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;padding:14px 18px;border-radius:6px;min-height:50px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">WhatsApp</a>' +
+          '<a data-k="sms" class="btn btn-o" style="color:#367A65;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 18px;border-radius:6px;border:1.5px solid #367A65;min-height:50px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">SMS poruka</a>' +
+          '<button type="button" data-k="copy" class="btn btn-o" style="font:inherit;background:transparent;color:#367A65;font-weight:700;font-size:15.5px;padding:13px 18px;border-radius:6px;border:1.5px solid #367A65;min-height:50px;display:flex;align-items:center;justify-content:center;cursor:pointer">Kopirajte poruku</button>' +
+          '<a data-k="tel" class="btn btn-o" style="color:#367A65;text-decoration:none;font-weight:700;font-size:15.5px;padding:13px 18px;border-radius:6px;border:1.5px solid #367A65;min-height:50px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">Pozovite nas</a>' +
+          '</div>' +
+          '<button type="button" data-k="back" style="align-self:flex-start;background:none;border:0;padding:0;font:inherit;font-size:14.5px;font-weight:700;color:#367A65;cursor:pointer;min-height:44px">← Nazad na formu</button>';
+        $('#form-wrap').parentNode.insertBefore(box, $('#form-wrap').nextSibling);
+        $('[data-k="back"]', box).addEventListener('click', function () { box.hidden = true; $('#form-wrap').hidden = false; fields.ime.focus(); });
+      }
+      $('[data-k="viber"]', box).href = 'viber://chat?number=%2B' + num + '&draft=' + msg;
+      $('[data-k="wa"]', box).href = 'https://wa.me/' + num + '?text=' + msg;
+      $('[data-k="sms"]', box).href = 'sms:+' + num + '?&body=' + msg;
+      $('[data-k="tel"]', box).href = 'tel:+' + num;
+      var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+      $('[data-k="viber"]', box).style.display = touch ? 'flex' : 'none';
+      $('[data-k="sms"]', box).style.display = touch ? 'flex' : 'none';
+      var cp = $('[data-k="copy"]', box); cp.style.display = touch ? 'none' : 'flex'; cp.textContent = 'Kopirajte poruku';
+      cp.onclick = function () {
+        var txt = decodeURIComponent(msg);
+        var done = function () { cp.textContent = 'Kopirano ✓'; };
+        if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, function () { window.prompt('Kopirajte poruku:', txt); });
+        else window.prompt('Kopirajte poruku:', txt);
+      };
+      $('#form-wrap').hidden = true; box.hidden = false; box.focus();
+    }
+
+    /* Dolazak sa druge stranice (?usluga=...): usluga unaprijed izabrana */
+    try {
+      var qs = new URLSearchParams(location.search).get('usluga');
+      if (qs && fields.usluga && $('option[value="' + qs.replace(/"/g, '') + '"]', fields.usluga)) fields.usluga.value = qs;
+    } catch (e) {}
+
+    /* Klik na uslugu: forma dobija tu uslugu unaprijed izabranu */
+    $$('a[data-usluga]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var v = a.getAttribute('data-usluga');
+        if (fields.usluga && $('option[value="' + v + '"]', fields.usluga)) { fields.usluga.value = v; setErr('usluga', ''); }
+      });
     });
 
     var resetBtn = $('#form-reset');

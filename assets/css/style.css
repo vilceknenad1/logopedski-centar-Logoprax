@@ -66,7 +66,8 @@ section[style*="clamp(72px"]{padding-top:56px !important;padding-bottom:60px !im
 .banner-img img{object-position:center top !important}
 section[aria-labelledby="iskustva"] figure{min-height:0 !important;gap:18px !important}
 section[aria-labelledby="iskustva"] blockquote{font-size:17px !important;line-height:1.55 !important}
-.map-card{min-height:220px !important}
+.map-card{min-height:300px !important}
+section[aria-labelledby="zasto"] .g12 > div.s5 > ul{margin-top:18px !important;padding-top:16px !important;gap:10px !important}
 .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:28px 20px !important;padding-bottom:32px !important}
 .foot-grid > :first-child,.foot-grid > :last-child{grid-column:1 / -1 !important}
 .foot-grid a{word-break:normal}
@@ -105,7 +106,7 @@ section[aria-labelledby="zasto"] h2{margin-bottom:28px !important}
 @container lp (max-width:680px){.hero-media{padding-bottom:0 !important}.hero-quote{position:relative !important;left:auto !important;bottom:auto !important;width:100% !important;margin-top:12px !important;padding:14px 16px !important;gap:8px !important;box-shadow:0 0 0 1px #E3EEEA !important;animation:none !important}.hero-quote > span:first-child svg{width:20px;height:16px}.hero-quote > span:first-child > span{font-size:10.5px !important}.hero-quote blockquote{font-size:14px !important;line-height:1.45 !important}.hero-quote figcaption{padding-top:8px !important;font-size:12.5px !important}}
 @container lp (max-width:680px){.s4,.s6{grid-column:span 12}.g12{gap:16px}.topbar{display:none !important}.hide-sm{display:none !important}}
 /* ---------- ANIMACIJE ---------- */
-@keyframes lpRise{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
+@keyframes lpRise{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
 @keyframes lpZoom{from{opacity:0;scale:.94}to{opacity:1;scale:1}}
 @keyframes lpBreathe{0%,100%{scale:1}50%{scale:1.045}}
 @keyframes lpDrift{0%,100%{scale:1;rotate:0deg}50%{scale:.97;rotate:8deg}}
@@ -129,7 +130,7 @@ section[aria-labelledby="zasto"] h2{margin-bottom:28px !important}
 }
 @supports (animation-timeline: view()){
 @media (prefers-reduced-motion: no-preference){
-section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:lpRise linear both;animation-timeline:view();animation-range:entry 5% cover 28%}
+section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:lpRise linear both;animation-timeline:view();animation-range:entry 0% cover 12%}
 }
 @container lp (max-width:1080px){section h2,section .svc,.g12 > div,#tim article,#tim > div > div:nth-child(2),ol > li,#o-nama > div > div,#kontakt > div > div > *,section figure,section[aria-label] > div > *{animation:none !important;opacity:1 !important;translate:none !important}}
 }
@@ -174,6 +175,13 @@ section h2{font-size:clamp(28px,8.2vw,32px) !important;line-height:1.1 !importan
 #usluge .g12 > a:last-child > div:first-child{height:auto !important;flex:0 0 42% !important;padding:22px !important}
 #usluge .g12 > a:last-child > div:first-child > div{height:100% !important;min-height:200px}
 .about-img{max-width:520px !important}
+}
+/* ===== ISPRAVKE NAKON KRITIKE ===== */
+#iskustva{font-size:12.5px !important;line-height:1.4 !important;letter-spacing:.18em !important;animation:none !important;opacity:1 !important;translate:none !important}
+@container lp (max-width:680px){
+#usluge div:has(> .chip){gap:0 !important;flex-basis:100% !important}
+#usluge .chip{width:100%;box-sizing:border-box;border-radius:0 !important;border:0 !important;border-bottom:1px solid #E3EEEA !important;background:transparent !important;box-shadow:none !important;padding:10px 0 !important;min-height:46px !important;font-size:15px !important}
+#usluge .chip:last-child{border-bottom:0 !important}
 }
 
 /* Stranica usluge */
